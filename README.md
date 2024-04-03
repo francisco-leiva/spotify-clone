@@ -19,7 +19,7 @@ This repository contains a clone of the music service called Spotify built using
 ## Installation
 
 1. Clone this repository: `git clone https://github.com/francisco-leiva/spotify-clone.git`
-2. Navigate to the project folder: `cd spotify-clon`
+2. Navigate to the project folder: `cd spotify-clone`
 3. Install dependencies: `pnpm install`
 4. Run the project: `pnpm dev`
 
