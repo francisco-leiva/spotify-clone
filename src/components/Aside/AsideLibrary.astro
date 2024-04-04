@@ -1,0 +1,30 @@
+---
+import Library from '@/icons/Library.astro'
+import { playlists } from '@/lib/data'
+import AsidePlaylists from './AsidePlaylists.astro'
+---
+
+<div class='h-full bg-[#121212] px-3 py-2 rounded-lg'>
+  <a
+    href='#'
+    class='p-3 flex items-center gap-5 font-bold opacity-50 hover:opacity-100'
+  >
+    <Library />
+
+    <span>Your Library</span>
+  </a>
+
+  <div>
+    <ul>
+      {
+        playlists.map((playlist) => {
+          return (
+            <li class='rounded-md hover:bg-[#1a1a1a]'>
+              <AsidePlaylists playlist={playlist} />
+            </li>
+          )
+        })
+      }
+    </ul>
+  </div>
+</div>

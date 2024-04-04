@@ -1,5 +1,5 @@
 ---
-import Aside from '@/components/Aside.astro'
+import Aside from '@/components/Aside/Aside.astro'
 
 interface Props {
   title: string
@@ -33,7 +33,7 @@ const { title } = Astro.props
       <slot />
     </main>
 
-    <footer class='h-16 bg-[#000] [grid-area:footer] md:h-20'></footer>
+    <footer class='h-16 bg-[#000] [grid-area:player] md:h-20'></footer>
   </body>
 </html>
 
@@ -41,14 +41,14 @@ const { title } = Astro.props
   body {
     grid-template-areas:
       'main'
-      'footer';
+      'player';
   }
 
   @media (width > 768px) {
     body {
       grid-template-areas:
         'aside main'
-        'footer footer';
+        'player player';
     }
   }
 </style>
