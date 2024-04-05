@@ -39,7 +39,7 @@ const greetingsMessage =
 
   <h2 class='px-5 text-2xl font-bold'>{greetingsMessage}</h2>
 
-  <div class='px-5 py-2 flex'>
+  <div class='px-5 py-2 flex flex-wrap'>
     {playlists.map((playlist) => <PlaylistCard playlist={playlist} />)}
   </div>
 </div>
