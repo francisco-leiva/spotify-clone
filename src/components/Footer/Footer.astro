@@ -1,11 +1,11 @@
 ---
-import Player from './Player.jsx'
+import Player from './Player.tsx'
 ---
 
 <div class='h-full grid grid-cols-[30%_40%_30%] items-center'>
   <div>Current Song</div>
 
-  <Player />
+  <Player client:load />
 
   <div class='justify-self-end'>Volume</div>
 </div>
