@@ -1,0 +1,18 @@
+---
+import { songs, type Song } from '@/lib/data'
+
+const firstSong: Song = songs[0]
+---
+
+<div class='w-full h-full flex items-center gap-3'>
+  <img
+    src={firstSong.image}
+    class='w-14 h-14 rounded-sm'
+    alt={firstSong.title}
+  />
+
+  <div>
+    <h3>{firstSong.title}</h3>
+    <span class='text-sm opacity-50'>{firstSong.artists.join(', ')}</span>
+  </div>
+</div>
