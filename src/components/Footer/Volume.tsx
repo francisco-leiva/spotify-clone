@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
+import { usePlayerStore } from '@/store/playerStore'
 import { Slider } from './Slider'
 
 const VolumeHigh = () => (
@@ -34,34 +35,47 @@ const VolumeOff = () => (
 )
 
 export default function Volume() {
-  const [value, setValue] = useState(100)
+  const { volume, setVolume } = usePlayerStore((state) => ({
+    volume: state.volume,
+    setVolume: state.setVolume,
+  }))
+  const [sliderValue, setSliderValue] = useState(100)
+  const inputRef = useRef<HTMLInputElement>(null)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const tempSliderValue = e.target.valueAsNumber
-    const max = Number(e.target.max)
-    const progressCalc = (tempSliderValue / max) * 100
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.style.background = `linear-gradient(to right, #fff ${sliderValue}%, rgba(255, 255, 255, 0.3) ${sliderValue}%)`
+    }
+  }, [sliderValue])
 
-    e.target.style.background = `linear-gradient(to right, #fff ${progressCalc}%, rgba(255, 255, 255, 0.3) ${progressCalc}%)`
+  const handleClick = () => {
+    if (volume === 0) {
+      setVolume(1)
+      setSliderValue(() => 100)
+      return
+    }
 
-    setValue((prev) => tempSliderValue)
+    setVolume(0)
+    setSliderValue(() => 0)
   }
 
-  const sliderBackgound = {
-    background: `linear-gradient(to right, #fff 100%, rgba(255, 255, 255, 0.3) 100%)`,
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setVolume(e.target.valueAsNumber / 100)
+    setSliderValue(() => e.target.valueAsNumber)
   }
 
   return (
     <div className='justify-self-end flex items-center gap-2'>
-      <div>
-        <VolumeHigh />
-      </div>
+      <button onClick={handleClick}>
+        {volume === 0 ? <VolumeOff /> : <VolumeHigh />}
+      </button>
 
       <Slider
-        value={value}
+        inputRef={inputRef}
+        value={sliderValue}
         min={0}
         max={100}
         onChange={handleChange}
-        style={sliderBackgound}
       />
     </div>
   )
