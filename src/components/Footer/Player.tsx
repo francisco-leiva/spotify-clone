@@ -1,30 +1,54 @@
-import { useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { Play } from '@/icons/Play'
 import { Pause } from '@/icons/Pause'
 import { Slider } from './Slider'
+import { usePlayerStore } from '@/store/playerStore'
 
 export default function Player() {
-  const [value, setValue] = useState(0)
+  const { volume } = usePlayerStore((state) => ({
+    volume: state.volume,
+  }))
+  const [time, setTime] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const tempSliderValue = e.target.valueAsNumber
-    const max = Number(e.target.max)
-    const progressCalc = (tempSliderValue / max) * 100
+  useEffect(() => {
+    if (audioRef.current) audioRef.current.volume = volume
+  }, [volume])
 
-    e.target.style.background = `linear-gradient(to right, #fff ${progressCalc}%, rgba(255, 255, 255, 0.3) ${progressCalc}%)`
+  useEffect(() => {
+    if (inputRef.current) {
+      const max = inputRef.current.max
+      const progress = (time / Number(max)) * 100
+      inputRef.current.style.background = `linear-gradient(to right, #fff ${progress}%, rgba(255, 255, 255, 0.3) ${progress}%)`
+    }
+  }, [time])
 
-    setValue((prev) => tempSliderValue)
+  const handleClick = () => {
+    if (isPlaying) {
+      audioRef.current?.pause()
+    } else {
+      audioRef.current?.play()
+    }
+
+    setIsPlaying((prev) => !prev)
   }
 
-  const sliderBackgound = {
-    background: `linear-gradient(to right, #fff 0%, rgba(255, 255, 255, 0.3) 0%)`,
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTime(() => e.target.valueAsNumber)
   }
 
   return (
     <div className='w-full h-full justify-self-center flex flex-col justify-center items-center gap-1'>
+      <audio ref={audioRef} src='/music/1/01.mp3' />
+
       <div>
-        <button className='w-8 h-8 bg-white text-black rounded-full [&_svg]:mx-auto'>
-          <Play />
+        <button
+          className='w-8 h-8 bg-white text-black rounded-full [&_svg]:mx-auto'
+          onClick={handleClick}
+        >
+          {isPlaying ? <Pause /> : <Play />}
         </button>
       </div>
 
@@ -32,12 +56,12 @@ export default function Player() {
         <span className='text-sm opacity-50'>0:00</span>
 
         <Slider
+          inputRef={inputRef}
           className='flex-1'
-          value={value}
+          value={time}
           min={0}
           max={240}
           onChange={handleChange}
-          style={sliderBackgound}
         />
 
         <span className='text-sm opacity-50'>3:40</span>
