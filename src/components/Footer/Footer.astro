@@ -1,11 +1,11 @@
 ---
-import CurrentSong from './CurrentSong.astro'
-import Player from './Player.tsx'
+import CurrentSong from './CurrentSong'
+import Player from './Player'
 import Volume from './Volume'
 ---
 
 <div class='h-full px-2 grid grid-cols-[30%_40%_30%] items-center'>
-  <CurrentSong />
+  <CurrentSong client:load />
 
   <Player client:load />
 
