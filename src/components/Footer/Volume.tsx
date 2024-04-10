@@ -39,7 +39,12 @@ export default function Volume() {
 
   return (
     <div className='justify-self-end flex items-center gap-2'>
-      <button className='opacity-65 hover:opacity-100' onClick={handleClick}>
+      <button
+        type='button'
+        aria-label='Toggle mute'
+        className='opacity-65 hover:opacity-100'
+        onClick={handleClick}
+      >
         {sliderValue === 0 ? (
           <VolumeOff />
         ) : sliderValue <= 30 ? (
