@@ -1,6 +1,5 @@
 import { usePlayerStore } from '@/store/playerStore'
-import { Play } from '@/icons/Play'
-import { Pause } from '@/icons/Pause'
+import { Play, Pause } from '@/icons/PlayerIcons'
 import { type Playlist, type Song } from '@/lib/data'
 
 export default function CardButton({ playlistId }: { playlistId: string }) {
