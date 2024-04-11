@@ -16,6 +16,7 @@ export default function SongTime({
   audio: MutableRefObject<HTMLAudioElement | null>
 }) {
   const currentMusic = usePlayerStore((state) => state.currentMusic)
+  const isPlaying = usePlayerStore((state) => state.isPlaying)
   const songDuration = currentMusic.song?.duration
   const [time, setTime] = useState(0)
   const timeInputRef = useRef<HTMLInputElement>(null)
@@ -34,7 +35,7 @@ export default function SongTime({
     return () => {
       audio.current?.removeEventListener('timeupdate', handleTimeUpdate)
     }
-  })
+  }, [])
 
   const handleTimeUpdate = () => {
     setTime(() => audio.current?.currentTime || 0)
@@ -50,7 +51,7 @@ export default function SongTime({
   }
 
   const handleMouseUp = () => {
-    audio.current?.play()
+    if (isPlaying) audio.current?.play()
   }
 
   return (
@@ -62,7 +63,7 @@ export default function SongTime({
         className='flex-1'
         value={time}
         min={0}
-        max={audio.current?.duration || 210}
+        max={audio.current?.duration || 1}
         onChange={handleChange}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
