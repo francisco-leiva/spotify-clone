@@ -22,20 +22,18 @@ export default function SongTime({
   const timeInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    if (timeInputRef.current) {
-      const max = timeInputRef.current.max
-      const progress = (time / Number(max)) * 100
-      timeInputRef.current.style.background = `linear-gradient(to right, #fff ${progress}%, rgba(255, 255, 255, 0.3) ${progress}%)`
-    }
-  }, [time])
-
-  useEffect(() => {
     audio.current?.addEventListener('timeupdate', handleTimeUpdate)
 
     return () => {
       audio.current?.removeEventListener('timeupdate', handleTimeUpdate)
     }
   }, [])
+
+  if (timeInputRef.current) {
+    const max = timeInputRef.current.max
+    const progress = (time / Number(max)) * 100
+    timeInputRef.current.style.background = `linear-gradient(to right, #fff ${progress}%, rgba(255, 255, 255, 0.3) ${progress}%)`
+  }
 
   const handleTimeUpdate = () => {
     setTime(() => audio.current?.currentTime || 0)
@@ -60,10 +58,10 @@ export default function SongTime({
 
       <Slider
         inputRef={timeInputRef}
-        className='flex-1'
+        className='flex-1 bg-white/30'
         value={time}
         min={0}
-        max={audio.current?.duration || 1}
+        max={audio.current?.duration || 100}
         onChange={handleChange}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}

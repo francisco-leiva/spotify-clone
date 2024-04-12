@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import { usePlayerStore } from '@/store/playerStore'
 import {
   VolumeHigh,
@@ -14,11 +14,9 @@ export default function Volume() {
   const inputRef = useRef<HTMLInputElement>(null)
   const previousSliderRef = useRef<number>(sliderValue)
 
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.style.background = `linear-gradient(to right, #fff ${sliderValue}%, rgba(255, 255, 255, 0.3) ${sliderValue}%)`
-    }
-  }, [sliderValue])
+  if (inputRef.current) {
+    inputRef.current.style.background = `linear-gradient(to right, #fff ${sliderValue}%, rgba(255, 255, 255, 0.3) ${sliderValue}%)`
+  }
 
   const handleClick = () => {
     if (sliderValue === 0) {
