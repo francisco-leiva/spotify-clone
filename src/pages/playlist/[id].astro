@@ -16,7 +16,10 @@ const bgGradient = {
 ---
 
 <Layout title=`${playlist?.title} | Spotify Playlist`>
-  <div class='max-h-[calc(100vh-6rem)] rounded-lg overflow-y-scroll'>
+  <div
+    id='playlistContainer'
+    class='max-h-[calc(100vh-6rem)] rounded-lg overflow-y-scroll'
+  >
     <section class='px-5' style={bgGradient}>
       <header class='py-4 flex gap-2'>
         <button
@@ -91,3 +94,30 @@ const bgGradient = {
     </section>
   </div>
 </Layout>
+
+<style>
+  @media (width > 1024px) {
+    #playlistContainer::-webkit-scrollbar {
+      width: 0.75rem;
+      height: 0.75rem;
+    }
+
+    #playlistContainer::-webkit-scrollbar-track {
+      background: transparent;
+      border-top-right-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+    }
+
+    #playlistContainer::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    #playlistContainer::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    #playlistContainer::-webkit-scrollbar-thumb:active {
+      background: rgba(255, 255, 255, 0.7);
+    }
+  }
+</style>
