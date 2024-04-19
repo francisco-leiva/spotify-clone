@@ -3,6 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import { playlists, songs } from '@/lib/data'
 import Back from '@/icons/Back.astro'
 import Forward from '@/icons/Forward.astro'
+import PlaylistPlayButton from '@/components/Playlist/PlaylistPlayButton'
 
 const { id } = Astro.params
 
@@ -50,6 +51,10 @@ const bgGradient = {
         <h1 class='text-6xl font-bold'>{playlist?.title}</h1>
       </div>
     </section>
+
+    <div class='px-5 py-4'>
+      <PlaylistPlayButton playlistId={playlist?.id} client:visible />
+    </div>
 
     <section class='mt-3 px-5'>
       <header
