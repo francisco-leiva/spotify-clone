@@ -16,6 +16,11 @@ export default function CardButton({ playlistId }: { playlistId: string }) {
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault()
 
+    if (isPlaylistPaused) {
+      setIsPlaying(true)
+      return
+    }
+
     if (isPlayingPlaylist) {
       setIsPlaying(false)
       return
