@@ -1,0 +1,94 @@
+---
+import { playlists } from '@/lib/data'
+import Back from '@/icons/Back.astro'
+import Forward from '@/icons/Forward.astro'
+import SmallPlaylistCard from './SmallPlaylistCard.astro'
+import PlaylistCard from './PlaylistCard.astro'
+
+const greetings = {
+  morning: 'Good Morning',
+  afternoon: 'Good Afternoon',
+  evening: 'Good Evening',
+}
+
+// Greetings
+const date = new Date()
+const hour = date.getHours()
+const greetingsMessage =
+  hour >= 6 && hour < 12
+    ? greetings.morning
+    : hour < 18
+      ? greetings.afternoon
+      : greetings.evening
+---
+
+<div
+  id='mainPageContainer'
+  class='max-h-[calc(100vh-6rem)] rounded-lg overflow-y-scroll'
+>
+  <header class='px-5 py-4 flex gap-2'>
+    <button
+      type='button'
+      aria-label='Go Back'
+      disabled
+      class='w-8 h-8 bg-black/70 rounded-full [&_svg]:mx-auto disabled:opacity-50 disabled:cursor-not-allowed'
+    >
+      <Back />
+    </button>
+
+    <button
+      type='button'
+      aria-label='Go Forward'
+      class='w-8 h-8 bg-black/70 rounded-full [&_svg]:mx-auto disabled:opacity-50 disabled:cursor-not-allowed'
+    >
+      <Forward />
+    </button>
+  </header>
+
+  <h2 class='mb-2 px-5 text-2xl font-bold'>{greetingsMessage}</h2>
+
+  <div class='px-5 py-2 grid grid-cols-3 grid-rows-2 gap-2'>
+    {
+      playlists
+        .slice(0, 6)
+        .map(({ id, title, cover }) => (
+          <SmallPlaylistCard id={id} title={title} cover={cover} />
+        ))
+    }
+  </div>
+
+  <div class='px-5 py-2 flex flex-wrap'>
+    {
+      playlists.map(({ id, title, cover, artists }) => (
+        <PlaylistCard id={id} title={title} cover={cover} artists={artists} />
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  @media (width > 1024px) {
+    #mainPageContainer::-webkit-scrollbar {
+      width: 0.75rem;
+      height: 0.75rem;
+    }
+
+    #mainPageContainer::-webkit-scrollbar-track {
+      background: transparent;
+      border-top-right-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+    }
+
+    #mainPageContainer::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    #mainPageContainer::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    #mainPageContainer::-webkit-scrollbar-thumb:active {
+      background: rgba(255, 255, 255, 0.7);
+    }
+  }
+</style>
