@@ -1,13 +1,14 @@
 ---
-import { type Playlist } from '@/lib/data'
 import CardButton from './CardButton'
 
 interface Props {
-  playlist: Playlist
+  id: string
+  title: string
+  cover: string
+  artists: string[]
 }
 
-const { playlist } = Astro.props
-const { id, albumId, title, color, cover, artists } = playlist
+const { id, title, cover, artists } = Astro.props
 const artistsName = artists.join(', ')
 ---
 
