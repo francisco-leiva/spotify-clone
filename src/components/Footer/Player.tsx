@@ -16,10 +16,11 @@ export default function Player() {
 
   useEffect(() => {
     const { song } = currentMusic
-    if (song && isPlaying) {
+
+    if (song && isPlaying && audioRef.current) {
       const src = `/music/${song.albumId}/0${song.id}.mp3`
-      if (audioRef.current) audioRef.current.src = src
-      audioRef.current?.play()
+      audioRef.current.src = src
+      audioRef.current.play()
     }
   }, [currentMusic])
 
