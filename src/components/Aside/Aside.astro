@@ -3,8 +3,10 @@ import AsideNav from './AsideNav.astro'
 import AsideLibrary from './AsideLibrary.astro'
 ---
 
-<div class='h-full grid grid-rows-[auto_1fr] gap-2'>
+<aside
+  class='hidden [grid-area:aside] bg-[#000] rounded-lg md:grid md:grid-rows-[auto_1fr] md:gap-2'
+>
   <AsideNav />
 
   <AsideLibrary />
-</div>
+</aside>
