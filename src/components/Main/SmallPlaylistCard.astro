@@ -1,0 +1,17 @@
+---
+interface Props {
+  id: string
+  title: string
+  cover: string
+}
+
+const { id, title, cover } = Astro.props
+---
+
+<article class='h-12 rounded-md bg-[#242424] hover:bg-[#2a2a2a]'>
+  <a href={`/playlist/${id}`} class='flex items-center gap-2 group'>
+    <img src={cover} alt={title} class='w-12 h-12 rounded-l-md' />
+
+    <h3>{title}</h3>
+  </a>
+</article>
