@@ -2,11 +2,11 @@ import { usePlayerStore } from '@/store/playerStore'
 import { Play, Pause } from '@/icons/PlayerIcons'
 import { type Playlist, type Song } from '@/lib/data'
 
-export default function SmallCardButton({
-  playlistId,
-}: {
+interface Props {
   playlistId: string
-}) {
+}
+
+export default function SmallCardButton({ playlistId }: Props) {
   const currentMusic = usePlayerStore((state) => state.currentMusic)
   const setcurrentMusic = usePlayerStore((state) => state.setCurrentMusic)
   const isPlaying = usePlayerStore((state) => state.isPlaying)
@@ -45,7 +45,7 @@ export default function SmallCardButton({
     <button
       type='button'
       aria-label='Play playlist'
-      className={`w-8 h-8 bg-green-500 text-black rounded-full [&_svg]:mx-auto opacity-0 transition-opacity duration-200 hover:bg-[#1fdf64] shadow-[0_8px_8px_rgba(0,0,0,.3)] hover:scale-105 group-hover:opacity-100 ${
+      className={`hidden w-8 h-8 bg-green-500 text-black rounded-full [&_svg]:mx-auto opacity-0 transition-opacity duration-200 hover:bg-[#1fdf64] shadow-[0_8px_8px_rgba(0,0,0,.3)] hover:scale-105 group-hover:opacity-100 lg:inline-block ${
         isPlayingPlaylist ? 'opacity-100' : ''
       }`}
       onClick={(e) => handleClick(e)}
