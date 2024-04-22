@@ -16,10 +16,15 @@ import AsidePlaylists from './AsidePlaylists.astro'
   <div>
     <ul>
       {
-        playlists.map((playlist) => {
+        playlists.map(({ id, title, cover, artists }) => {
           return (
             <li class='rounded-md hover:bg-[#1a1a1a]'>
-              <AsidePlaylists playlist={playlist} />
+              <AsidePlaylists
+                id={id}
+                title={title}
+                cover={cover}
+                artists={artists}
+              />
             </li>
           )
         })

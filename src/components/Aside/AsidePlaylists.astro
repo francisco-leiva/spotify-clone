@@ -1,13 +1,15 @@
 ---
 import { Image } from 'astro:assets'
-import { type Playlist } from '@/lib/data'
+import AsidePlaylistTitle from './AsidePlaylistTitle'
 
 interface Props {
-  playlist: Playlist
+  id: string
+  title: string
+  cover: string
+  artists: string[]
 }
 
-const { playlist } = Astro.props
-const { id, title, cover, artists } = playlist
+const { id, title, cover, artists } = Astro.props
 const artistsName = artists.join(', ')
 ---
 
@@ -22,7 +24,7 @@ const artistsName = artists.join(', ')
   />
 
   <div>
-    <h3>{title}</h3>
+    <AsidePlaylistTitle title={title} playlistId={id} client:visible />
     <span class='text-sm opacity-50'>{artistsName}</span>
   </div>
 </a>
