@@ -22,7 +22,7 @@ const { id, title, cover } = Astro.props
       class='rounded-l-md'
     />
 
-    <h3 class='flex-1'>{title}</h3>
+    <h3 class='flex-1 text-sm md:text-base'>{title}</h3>
 
     <SmallCardButton playlistId={id} client:visible />
   </a>

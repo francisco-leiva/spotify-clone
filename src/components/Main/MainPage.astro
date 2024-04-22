@@ -47,7 +47,9 @@ const greetingsMessage =
 
   <h2 class='mb-2 px-5 text-2xl font-bold'>{greetingsMessage}</h2>
 
-  <div class='px-5 py-2 grid grid-cols-3 grid-rows-2 gap-2'>
+  <div
+    class='px-5 py-2 grid grid-cols-2 grid-rows-3 gap-2 lg:grid-cols-3 lg:grid-rows-2'
+  >
     {
       playlists
         .slice(0, 6)
@@ -57,7 +59,9 @@ const greetingsMessage =
     }
   </div>
 
-  <div class='px-5 py-2 flex flex-wrap'>
+  <div
+    class='px-5 py-2 grid grid-cols-2 justify-items-center sm:flex sm:flex-wrap'
+  >
     {
       playlists.map(({ id, title, cover, artists }) => (
         <PlaylistCard id={id} title={title} cover={cover} artists={artists} />
