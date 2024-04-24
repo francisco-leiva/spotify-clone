@@ -36,7 +36,7 @@ export default function Volume() {
   }
 
   return (
-    <div className='justify-self-end flex items-center gap-2'>
+    <div className='hidden justify-self-end md:flex md:items-center md:gap-2'>
       <button
         type='button'
         aria-label='Toggle mute'

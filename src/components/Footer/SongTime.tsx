@@ -53,7 +53,7 @@ export default function SongTime({
   }
 
   return (
-    <div className='w-full flex items-center gap-2'>
+    <div className='hidden w-full md:flex md:items-center md:gap-2'>
       <span className='text-sm opacity-50'>{formatTime(time)}</span>
 
       <Slider
