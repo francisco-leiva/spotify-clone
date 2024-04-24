@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets'
 import SmallCardButton from './SmallCardButton'
 
 interface Props {
@@ -13,12 +12,12 @@ const { id, title, cover } = Astro.props
 
 <article class='h-12 rounded-md bg-[#242424] hover:bg-[#2a2a2a]'>
   <a href={`/playlist/${id}`} class='pr-2 flex items-center gap-2 group'>
-    <Image
+    <img
       src={cover}
       alt={title}
       width={48}
       height={48}
-      loading={'eager'}
+      loading='eager'
       class='rounded-l-md'
     />
 

@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets'
 import CardButton from './CardButton'
 
 interface Props {
@@ -18,12 +17,12 @@ const artistsName = artists.join(', ')
 >
   <a href={`/playlist/${id}`} class='flex flex-col gap-2 group'>
     <div class='relative'>
-      <Image
+      <img
         src={cover}
         alt={title}
         width={164}
         height={164}
-        loading={'eager'}
+        loading='eager'
         class='rounded-md'
       />
 
