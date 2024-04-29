@@ -1,6 +1,6 @@
 import { usePlayerStore } from '@/store/playerStore'
 import { BigPlay, BigPause } from '@/icons/PlayerIcons'
-import { type Playlist, type Song } from '@/lib/data'
+import type { CurrentMusic } from '@/store/playerStore'
 
 export default function PlaylistPlayButton({
   playlistId,
@@ -29,11 +29,7 @@ export default function PlaylistPlayButton({
     }
 
     const res = await fetch(`../api/get-info-playlist.json?id=${playlistId}`)
-    const {
-      playlist,
-      song,
-      songs,
-    }: { playlist: Playlist; song: Song; songs: Song[] } = await res.json()
+    const { playlist, song, songs }: CurrentMusic = await res.json()
 
     setIsPlaying(true)
     setcurrentMusic({ playlist, song, songs })

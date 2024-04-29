@@ -1,12 +1,14 @@
 import { create } from 'zustand'
 import { type Song, type Playlist } from '@/lib/data'
 
+export type CurrentMusic = {
+  playlist: Playlist | null
+  song: Song | null
+  songs: Song[]
+}
+
 interface Store {
-  currentMusic: {
-    playlist: Playlist | null
-    song: Song | null
-    songs: Song[]
-  }
+  currentMusic: CurrentMusic
   volume: number
   isPlaying: boolean
   setCurrentMusic: (currentMusic: Store['currentMusic']) => void
